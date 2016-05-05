@@ -1,8 +1,12 @@
 {
-  "name": "y",
+  "name": "getgoing",
   "version": "0.1.0",
   "description": "CLI for quickly copying config/meta files into your new fancy project",
   "main": "index.js",
+  "bin": "index.js",
+  "files": [
+    "templates"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
