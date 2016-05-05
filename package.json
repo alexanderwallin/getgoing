@@ -1,0 +1,19 @@
+{
+  "name": "y",
+  "version": "0.1.0",
+  "description": "CLI for quickly copying config/meta files into your new fancy project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexanderwallin/getgoing.git"
+  },
+  "author": "Alexander Wallin <office@alexanderwallin.com> (http://alexanderwallin.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexanderwallin/getgoing/issues"
+  },
+  "homepage": "https://github.com/alexanderwallin/getgoing#readme"
+}
