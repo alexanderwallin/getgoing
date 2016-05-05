@@ -2,6 +2,10 @@
   "name": "getgoing",
   "version": "0.1.0",
   "description": "CLI for quickly copying config/meta files into your new fancy project",
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
   "main": "index.js",
   "bin": "index.js",
   "files": [
