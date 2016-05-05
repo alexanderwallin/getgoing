@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/alexanderwallin/getgoing/issues"
   },
-  "homepage": "https://github.com/alexanderwallin/getgoing#readme"
+  "homepage": "https://github.com/alexanderwallin/getgoing#readme",
+  "dependencies": {
+    "glob": "^7.0.3"
+  }
 }
