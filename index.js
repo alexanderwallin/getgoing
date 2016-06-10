@@ -5,20 +5,31 @@ const fs = require('fs')
 const glob = require('glob')
 const yargs = require('yargs')
 
-const args = yargs.argv
+const getGlob = (pattern = '{.*,*.*}') =>
+  path.join(__dirname, 'templates', pattern)
 
-const fileGlob = args._.length ? args._[0] : '{.*,*.*}'
-const globStr = `${__dirname}/templates/${fileGlob}`
+const getFiles = (globStr, cb) => {
+  glob(globStr, (err, files) => {
+    if (err) {
+      console.log('Error occured:')
+      console.log(err)
+      process.exit(1)
+    }
 
-console.log('\ngetgoing')
+    cb(files)
+  })
+}
 
-glob(globStr, (err, files) => {
-  if (err) {
-    console.log('Error occured:')
-    console.log(err)
-    process.exit(1)
-  }
+const ls = () => {
+  getFiles(getGlob(), files => {
+    console.log('\nFiles available for copying:\n')
+    console.log(files.map(x => path.basename(x)).map(x => `  ${x}`).join('\n'))
+    console.log()
+  })
+}
 
+const cp = (pattern = null) => {
+  getFiles(getGlob(pattern), (files) => {
   console.log('\nCopying:')
 
   files.forEach(file => {
@@ -31,3 +42,19 @@ glob(globStr, (err, files) => {
       .pipe(fs.createWriteStream(destination))
   })
 })
+}
+
+const args = yargs
+  .command('ls', 'List all available files')
+  .help('help')
+  .alias('h', 'help')
+  .argv
+
+console.log('\n- - - - - - - - - - -\n      getgoing\n- - - - - - - - - - -')
+
+if (args._[0] === 'ls') {
+  ls();
+}
+else {
+  cp(args._[0]);
+}
