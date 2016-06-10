@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/alexanderwallin/getgoing#readme",
   "dependencies": {
-    "glob": "^7.0.3"
+    "glob": "^7.0.3",
+    "yargs": "^4.7.1"
   }
 }
