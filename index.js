@@ -5,8 +5,8 @@ const fs = require('fs')
 const glob = require('glob')
 const yargs = require('yargs')
 
-const getGlob = (pattern = '{.*,*.*}') =>
-  path.join(__dirname, 'templates', pattern)
+const getGlob = (pattern) =>
+  `${__dirname}/templates/${pattern || '{.*,*.*}'}`
 
 const getFiles = (globStr, cb) => {
   glob(globStr, (err, files) => {
@@ -28,7 +28,7 @@ const ls = () => {
   })
 }
 
-const cp = (pattern = null) => {
+const cp = (pattern) => {
   getFiles(getGlob(pattern), (files) => {
   console.log('\nCopying:')
 
