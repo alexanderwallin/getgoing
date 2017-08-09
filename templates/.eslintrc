@@ -1,3 +1,17 @@
 {
-  "extends": "airbnb"
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "settings": {
+    "import/resolver": "webpack"
+  },
+  "rules": {
+    "import/extensions": 0,
+    "react/jsx-filename-extension": 0
+  }
 }
