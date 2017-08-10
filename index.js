@@ -47,6 +47,7 @@ const install = async () => {
     'eslint',
     'eslint-config-airbnb',
     'eslint-plugin-import',
+    'eslint-plugin-prettier',
     'eslint-import-resolver-webpack',
     'prettier',
     'webpack-dev-server',
