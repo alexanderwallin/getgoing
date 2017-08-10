@@ -33,6 +33,7 @@ const install = async () => {
 
   const deps = [
     'babel-core',
+    'babel-eslint',
     'babel-loader',
     'babel-polyfill',
     'babel-preset-latest',
@@ -46,6 +47,7 @@ const install = async () => {
   const devDeps = [
     'eslint',
     'eslint-config-airbnb',
+    'eslint-config-prettier',
     'eslint-plugin-import',
     'eslint-plugin-prettier',
     'eslint-import-resolver-webpack',
