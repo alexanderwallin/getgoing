@@ -68,20 +68,21 @@ const install = async (options) => {
     'webpack-dev-server',
   ]
 
-  const deps = options.app === true
-    ? [
-      ...commonDeps,
-      ...(options.heroku === true ? appBuildDeps : []),
-    ]
-    : commonDeps
+  const libDevDeps = [
+    'babel-cli',
+  ]
 
-  const devDeps = options.app === true
-    ? [
+  const deps = [
+    ...commonDeps,
+    ...(options.app === true && options.heroku === true ? appBuildDeps : []),
+  ]
+
+  const devDeps = [
       ...commonDevDeps,
-      ...appDevDeps,
-      ...(options.heroku === false ? appBuildDeps : []),
-    ]
-    : commonDevDeps
+    ...(options.app === true ? appDevDeps : []),
+    ...(options.app === true && options.heroku === false ? appBuildDeps : []),
+    ...(options.lib === true ? libDevDeps : []),
+  ]
 
   // console.log({ deps, devDeps })
   console.log('\nInstalling dependencies:\n ', deps.join('\n  '))
@@ -118,6 +119,10 @@ const args = yargs
         type: 'boolean',
         describe: 'Saves all devDependencies that is needed to run the app as regular dependencies',
       })
+      .option('lib', {
+        type: 'boolean',
+        describe: 'Installs dependencies needed to build a lib',
+      })
   })
   .help('help')
   .alias('h', 'help')
@@ -132,6 +137,7 @@ else if (args._[0] === 'i') {
   install({
     app: args.app,
     heroku: args.heroku,
+    lib: args.lib,
   })
 }
 else {
