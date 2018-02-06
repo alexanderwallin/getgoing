@@ -35,7 +35,7 @@ const ls = () => {
 const install = async (options) => {
   const babelBuildDeps = [
     'babel-core',
-    'babel-preset-latest',
+    'babel-preset-env',
     'babel-plugin-transform-object-rest-spread',
     'babel-plugin-transform-class-properties',
   ]
