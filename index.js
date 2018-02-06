@@ -29,31 +29,60 @@ const ls = () => {
   })
 }
 
-const install = async () => {
-
-  const deps = [
+/**
+ * Install npm dependencies
+ */
+const install = async (options) => {
+  const babelBuildDeps = [
     'babel-core',
-    'babel-eslint',
-    'babel-loader',
-    'babel-polyfill',
     'babel-preset-latest',
     'babel-plugin-transform-object-rest-spread',
     'babel-plugin-transform-class-properties',
-    'babel-plugin-transform-decorators-legacy',
-    'core-decorators',
-    'webpack',
   ]
 
-  const devDeps = [
+  const commonDeps = [
+    'babel-polyfill',
+    ...(options.heroku === true ? babelBuildDeps : []),
+  ]
+
+  const commonDevDeps = [
+    'babel-eslint',
     'eslint',
     'eslint-config-airbnb',
     'eslint-config-prettier',
     'eslint-plugin-import',
     'eslint-plugin-prettier',
-    'eslint-import-resolver-webpack',
     'prettier',
+    ...(options.heroku === false ? babelBuildDeps : []),
+  ]
+
+  const appBuildDeps = [
+    'babel-loader',
+    'babel-plugin-transform-decorators-legacy',
+    'core-decorators',
+    'webpack',
+  ]
+
+  const appDevDeps = [
+    'eslint-import-resolver-webpack',
     'webpack-dev-server',
   ]
+
+  const deps = options.app === true
+    ? [
+      ...commonDeps,
+      ...(options.heroku === true ? appBuildDeps : []),
+    ]
+    : commonDeps
+
+  const devDeps = options.app === true
+    ? [
+      ...commonDevDeps,
+      ...appDevDeps,
+      ...(options.heroku === false ? appBuildDeps : []),
+    ]
+    : commonDevDeps
+
   // console.log({ deps, devDeps })
   console.log('\nInstalling dependencies:\n ', deps.join('\n  '))
   const output = await exec(`npm i ${deps.join(' ')}`)
@@ -79,7 +108,17 @@ const cp = (pattern) => {
 
 const args = yargs
   .command('ls', 'List all available files')
-  .command('i', 'Install all necessary dependencies')
+  .command('i', 'Install all necessary dependencies', command => {
+    return command
+      .option('app', {
+        type: 'boolean',
+        describe: 'Installs Webpack dependencies',
+      })
+      .option('heroku', {
+        type: 'boolean',
+        describe: 'Saves all devDependencies that is needed to run the app as regular dependencies',
+      })
+  })
   .help('help')
   .alias('h', 'help')
   .argv
@@ -90,7 +129,10 @@ if (args._[0] === 'ls') {
   ls();
 }
 else if (args._[0] === 'i') {
-  install()
+  install({
+    app: args.app,
+    heroku: args.heroku,
+  })
 }
 else {
   cp(args._[0]);
