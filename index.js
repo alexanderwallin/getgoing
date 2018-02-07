@@ -56,15 +56,23 @@ const install = async (options) => {
     ...(options.heroku === false ? babelBuildDeps : []),
   ]
 
+  const appDeps = [
+    'react',
+    'react-dom',
+  ]
+
   const appBuildDeps = [
     'babel-loader',
     'babel-plugin-transform-decorators-legacy',
+    'babel-preset-react',
     'core-decorators',
     'webpack',
   ]
 
   const appDevDeps = [
     'eslint-import-resolver-webpack',
+    'eslint-plugin-jsx-a11y',
+    'eslint-plugin-react',
     'webpack-dev-server',
   ]
 
@@ -74,6 +82,7 @@ const install = async (options) => {
 
   const deps = [
     ...commonDeps,
+    ...(options.app === true ? appDeps : []),
     ...(options.app === true && options.heroku === true ? appBuildDeps : []),
   ]
 
