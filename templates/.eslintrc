@@ -11,6 +11,7 @@
     "import/resolver": "webpack"
   },
   "rules": {
+    "yoda": ["error", "never", { "exceptRange": true }],
     "import/extensions": [2, { "ignorePackages": true }],
     "react/jsx-filename-extension": 0
   }
