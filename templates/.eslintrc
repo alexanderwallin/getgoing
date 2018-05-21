@@ -13,6 +13,7 @@
   "rules": {
     "yoda": ["error", "never", { "exceptRange": true }],
     "import/extensions": [2, { "ignorePackages": true }],
-    "react/jsx-filename-extension": 0
+    "react/jsx-filename-extension": 0,
+    "react/prefer-stateless-function": [2, { "ignorePureComponents": true }],
   }
 }
