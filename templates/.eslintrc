@@ -11,7 +11,7 @@
     "import/resolver": "webpack"
   },
   "rules": {
-    "import/extensions": 0,
+    "import/extensions": [2, { "ignorePackages": true }],
     "react/jsx-filename-extension": 0
   }
 }
