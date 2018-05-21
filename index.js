@@ -57,6 +57,7 @@ const install = async (options) => {
   ]
 
   const appDeps = [
+    'prop-types',
     'react',
     'react-dom',
   ]
@@ -67,6 +68,7 @@ const install = async (options) => {
     'babel-preset-react',
     'core-decorators',
     'webpack',
+    'webpack-cli',
   ]
 
   const appDevDeps = [
