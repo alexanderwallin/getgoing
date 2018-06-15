@@ -12,7 +12,7 @@
   },
   "rules": {
     "yoda": ["error", "never", { "exceptRange": true }],
-    "import/extensions": [2, { "ignorePackages": true }],
+    "import/extensions": ["error", "always", { "ignorePackages": true }],
     "react/jsx-filename-extension": 0,
     "react/prefer-stateless-function": [2, { "ignorePureComponents": true }],
   }
