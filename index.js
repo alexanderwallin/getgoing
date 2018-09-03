@@ -33,19 +33,15 @@ const ls = () => {
  * Install npm dependencies
  */
 const install = async (options) => {
-  const babelBuildDeps = [
-    'babel-core',
-    'babel-preset-env',
-    'babel-plugin-transform-object-rest-spread',
-    'babel-plugin-transform-class-properties',
-  ]
-
   const commonDeps = [
-    'babel-polyfill',
-    ...(options.heroku === true ? babelBuildDeps : []),
+    '@babel/polyfill',
   ]
 
   const commonDevDeps = [
+    '@babel/core',
+    '@babel/preset-env',
+    'babel-plugin-transform-object-rest-spread',
+    'babel-plugin-transform-class-properties',
     'babel-eslint',
     'eslint',
     'eslint-config-airbnb',
@@ -53,7 +49,6 @@ const install = async (options) => {
     'eslint-plugin-import',
     'eslint-plugin-prettier',
     'prettier',
-    ...(options.heroku === false ? babelBuildDeps : []),
   ]
 
   const appDeps = [
@@ -62,36 +57,31 @@ const install = async (options) => {
     'react-dom',
   ]
 
-  const appBuildDeps = [
-    'babel-loader',
-    'babel-plugin-transform-decorators-legacy',
-    'babel-preset-react',
-    'core-decorators',
-    'webpack',
-    'webpack-cli',
-  ]
-
   const appDevDeps = [
+    '@babel/plugin-proposal-decorators',
+    '@babel/preset-react',
+    'babel-loader',
+    'core-decorators',
     'eslint-import-resolver-webpack',
     'eslint-plugin-jsx-a11y',
     'eslint-plugin-react',
+    'webpack',
+    'webpack-cli',
     'webpack-dev-server',
   ]
 
   const libDevDeps = [
-    'babel-cli',
+    '@babel/cli',
   ]
 
   const deps = [
     ...commonDeps,
     ...(options.app === true ? appDeps : []),
-    ...(options.app === true && options.heroku === true ? appBuildDeps : []),
   ]
 
   const devDeps = [
       ...commonDevDeps,
     ...(options.app === true ? appDevDeps : []),
-    ...(options.app === true && options.heroku === false ? appBuildDeps : []),
     ...(options.lib === true ? libDevDeps : []),
   ]
 
@@ -126,10 +116,6 @@ const args = yargs
         type: 'boolean',
         describe: 'Installs Webpack dependencies',
       })
-      .option('heroku', {
-        type: 'boolean',
-        describe: 'Saves all devDependencies that is needed to run the app as regular dependencies',
-      })
       .option('lib', {
         type: 'boolean',
         describe: 'Installs dependencies needed to build a lib',
@@ -147,7 +133,6 @@ if (args._[0] === 'ls') {
 else if (args._[0] === 'i') {
   install({
     app: args.app,
-    heroku: args.heroku,
     lib: args.lib,
   })
 }
