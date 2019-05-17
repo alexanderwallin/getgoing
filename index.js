@@ -40,8 +40,8 @@ const install = async (options) => {
   const commonDevDeps = [
     '@babel/core',
     '@babel/preset-env',
-    'babel-plugin-transform-object-rest-spread',
-    'babel-plugin-transform-class-properties',
+    '@babel/plugin-proposal-object-rest-spread',
+    '@babel/plugin-proposal-class-properties',
     'babel-eslint',
     'eslint',
     'eslint-config-airbnb',
